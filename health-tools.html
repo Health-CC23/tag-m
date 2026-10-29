@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Tools | TAG M</title>
+  <meta name="description" content="Free BMI, stress, breathing, water and sleep tools for students.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="TAG M home"><span class="brand-mark" aria-hidden="true"></span><span>TAG M<small>Health &amp; Wellbeing</small></span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="health-tools.html" aria-current="page">Health Tools</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="counseling.html">Counseling</a></li>
+          <li><a href="testimonials.html">Stories</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero"><div class="wrap"><h1>Health Tools</h1><p>Quick, private calculators and check-ins. Nothing you enter is saved or sent anywhere.</p></div></section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="jump" aria-label="Jump to a tool">
+          <a class="btn btn-ghost" href="#bmi">BMI</a>
+          <a class="btn btn-ghost" href="#stress">Stress check-in</a>
+          <a class="btn btn-ghost" href="#breathing">Breathing guide</a>
+          <a class="btn btn-ghost" href="#water">Water</a>
+          <a class="btn btn-ghost" href="#sleep">Sleep</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+
+        <!-- BMI -->
+        <div class="tool" id="bmi">
+          <h2>BMI calculator</h2>
+          <p>Body Mass Index compares your weight with your height. It is a rough screening number for adults aged 18 and over.</p>
+          <div class="tool-grid">
+            <form id="bmi-form" novalidate>
+              <div class="seg" role="group" aria-label="Units">
+                <button type="button" data-unit="metric" aria-pressed="true">Metric</button>
+                <button type="button" data-unit="imperial" aria-pressed="false">Imperial</button>
+              </div>
+              <div class="field" id="h-metric"><label for="bmi-cm">Height (cm)</label><input id="bmi-cm" type="number" inputmode="decimal" min="100" max="250" step="0.1" placeholder="e.g. 170"></div>
+              <div class="row" id="h-imp" hidden>
+                <div class="field"><label for="bmi-ft">Height (ft)</label><input id="bmi-ft" type="number" inputmode="numeric" min="3" max="8" placeholder="5"></div>
+                <div class="field"><label for="bmi-in">(in)</label><input id="bmi-in" type="number" inputmode="decimal" min="0" max="11.9" step="0.1" placeholder="7"></div>
+              </div>
+              <div class="field"><label for="bmi-w" id="bmi-wl">Weight (kg)</label><input id="bmi-w" type="number" inputmode="decimal" min="20" step="0.1" placeholder="e.g. 65"></div>
+              <p class="err" id="bmi-err" role="alert"></p>
+              <button class="btn" type="submit">Calculate</button>
+            </form>
+            <div class="result" id="bmi-out" aria-live="polite">
+              <p>Enter your height and weight to see your result.</p>
+            </div>
+          </div>
+          <p class="note" style="margin-top:1rem">BMI does not measure body fat, muscle, age, sex or ethnicity, and it is not suitable for under 18s or during pregnancy. Treat it as a starting point and talk to a doctor about your health.</p>
+        </div>
+
+        <!-- STRESS -->
+        <div class="tool" id="stress">
+          <h2>Stress check-in</h2>
+          <p>Think about the last two weeks. This is a simple self-reflection, not a diagnosis.</p>
+          <form id="stress-form" class="stack" novalidate>
+            <div id="stress-qs"></div>
+            <p class="err" id="stress-err" role="alert"></p>
+            <button class="btn" type="submit">See my result</button>
+          </form>
+          <div class="result" id="stress-out" aria-live="polite" style="margin-top:1rem" hidden></div>
+        </div>
+
+        <!-- BREATHING -->
+        <div class="tool" id="breathing">
+          <h2>Breathing guide</h2>
+          <p>Slow breathing can help you feel calmer within a few minutes. Pick a pattern, press start and follow the circle.</p>
+          <div class="tool-grid">
+            <div>
+              <div class="field"><label for="br-pattern">Pattern</label>
+                <select id="br-pattern">
+                  <option value="box">Box breathing (4 in, 4 hold, 4 out, 4 hold)</option>
+                  <option value="478">4-7-8 (4 in, 7 hold, 8 out)</option>
+                  <option value="calm">Gentle calm (4 in, 6 out)</option>
+                </select>
+              </div>
+              <div class="actions"><button class="btn" id="br-btn" type="button">Start</button></div>
+              <p class="note" style="margin-top:1rem">If you feel dizzy, stop and breathe normally.</p>
+            </div>
+            <div class="stage"><div class="orb" id="br-orb" role="status" aria-live="polite">Ready</div></div>
+          </div>
+        </div>
+
+        <!-- WATER -->
+        <div class="tool" id="water">
+          <h2>Daily water estimate</h2>
+          <div class="tool-grid">
+            <form id="water-form" novalidate>
+              <div class="field"><label for="wa-w">Weight (kg)</label><input id="wa-w" type="number" inputmode="decimal" min="20" max="300" placeholder="e.g. 65"></div>
+              <div class="field"><label for="wa-act">Activity level</label>
+                <select id="wa-act"><option value="0">Mostly sitting (studying)</option><option value="350">Some exercise (30 min)</option><option value="700">Very active (1 hour+)</option></select></div>
+              <div class="field"><label><input type="checkbox" id="wa-hot"> Hot weather today</label></div>
+              <p class="err" id="wa-err" role="alert"></p>
+              <button class="btn" type="submit">Estimate</button>
+            </form>
+            <div class="result" id="wa-out" aria-live="polite"><p>Enter your weight to get a daily estimate.</p></div>
+          </div>
+          <p class="note" style="margin-top:1rem">A general estimate of total fluid. Needs vary, and some comes from food and other drinks. Follow medical advice if you have a health condition.</p>
+        </div>
+
+        <!-- SLEEP -->
+        <div class="tool" id="sleep">
+          <h2>Sleep planner</h2>
+          <p>Sleep comes in cycles of about 90 minutes. Waking at the end of a cycle usually feels easier. We allow 15 minutes to fall asleep.</p>
+          <div class="tool-grid">
+            <form id="sleep-form" novalidate>
+              <div class="field"><label for="sl-mode">I want to</label>
+                <select id="sl-mode"><option value="wake">Wake up at a set time</option><option value="bed">Go to bed at a set time</option></select></div>
+              <div class="field"><label for="sl-time" id="sl-tl">Wake-up time</label><input id="sl-time" type="time" value="07:00"></div>
+              <button class="btn" type="submit">Show times</button>
+            </form>
+            <div class="result" id="sl-out" aria-live="polite"><p>Choose a time to see suggestions.</p></div>
+          </div>
+          <p class="note" style="margin-top:1rem">Most adults do well with 7 to 9 hours. Consistent sleep and wake times matter as much as the total.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <strong>TAG M</strong>, a student project at Applied Science Private University.
+      <ul class="footer-links">
+        <li><a href="health-tools.html">Health Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p>This site shares general information for education. It is not medical advice and does not replace a doctor. In an emergency, contact your local emergency services.</p>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>

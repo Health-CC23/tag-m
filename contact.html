@@ -1,100 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | TAG M</title>
+  <meta name="description" content="Get in touch with the TAG M team.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-
-
-  <nav class="navbar">
-    <div class="logo">
-      <a href="index.html">
-        <img src="https://i.postimg.cc/vTr7dZZw/whatsapp-image.jpg" alt="YourLogo" class="logo-img">
-      </a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="TAG M home"><span class="brand-mark" aria-hidden="true"></span><span>TAG M<small>Health &amp; Wellbeing</small></span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="health-tools.html">Health Tools</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="counseling.html">Counseling</a></li>
+          <li><a href="testimonials.html">Stories</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about_us.html">About Us</a></li>
-            <li><a href="resources.html" >Resource Hub</a></li>
-            <li><a href="testimonials.html">Success Stories</a></li>
-            <li><a href="counseling.html">Counseling</a></li>
-           <li><a href="Self help tools.html">Self Help Tools</a></li>
-           <li><a href="contact.html">Contact us</a></li>
-    </ul>
-  </nav>
-<br>
-  <div class=" contact-us">
-    <header>
-        <h1>Contact Us</h1>
-    </header>
+  </header>
 
-    <section class="welcome">
-        <h3><strong>Welcome to Space!</strong></h3><br><p> We’re here to support you feel free to reach out anytime.
-            You can contact us via phone, email, or through our social media channels.
-            We look forward to hearing from you and are always ready to help.   </p>
-    </section>
+  <main>
+    <section class="page-hero"><div class="wrap"><h1>Contact Us</h1><p>We are here to help. Reach out any time and we will get back to you.</p></div></section>
 
-    <section class="contact-info">
-        <div class="info-item">
-            <strong>Email:</strong> <a href="mailto:tagmasters@support.com">tagmasters@support.com</a>
+    <section class="section"><div class="wrap">
+      <div class="tool-grid">
+        <div class="panel">
+          <h2>Get in touch</h2>
+          <ul class="info-list">
+            <li><strong>Email:</strong> <a href="mailto:tagmasters@support.com">tagmasters@support.com</a></li>
+            <li><strong>Phone:</strong> <a href="tel:065216161">065216161</a></li>
+            <li><strong>Address:</strong> Applied Science University, Amman, Jordan</li>
+            <li><strong>Hours:</strong> 8:00 AM to 10:00 PM</li>
+          </ul>
+          <p class="note">This is a student project and is not a crisis line. In an emergency, contact your local emergency services.</p>
         </div>
-        <div class="info-item">
-            <strong>Phone:</strong> <a href="tel:065216161">065216161</a>
-        </div>
-        <div class="info-item">
-            <strong>Address:</strong> Jordan, Amman, Applied Science University.
-        </div>
-        <div class="info-item">
-            <strong>Hours:</strong> 8:00 AM - 10:00 PM
-        </div>
-    </section>
-
-
-    <section class="social-links">
-        <a href="https://instagram.com" target="_blank">
-            <img src="https://i.postimg.cc/bJGL4Pnq/Insta.jpg" alt="Instagram" title="Follow us on Instagram">
-        </a>
-        <a href="https://twitter.com" target="_blank">
-            <img src="https://i.postimg.cc/vTfhHvXj/X.png" alt="Twitter" title="Follow us on Twitter">
-        </a>
-        <a href="https://facebook.com" target="_blank">
-            <img src="https://i.postimg.cc/ncK2y0X9/facebook.png" alt="Facebook" title="Like us on Facebook">
-        </a>
-    </section>
-
-    <!-- Contact Form -->
-    <section class="contact-form">
-        <h2>Send us a message</h2>
-        <form id="contactForm">
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <a class="btn" href="#"> Contact us</a>
+        <form class="panel" id="contact-form" novalidate>
+          <h2>Send us a message</h2>
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" type="text" required></div>
+          <div class="field"><label for="c-email">Your email</label><input id="c-email" type="email" required></div>
+          <div class="field"><label for="c-sub">Subject</label><input id="c-sub" type="text" required></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+          <p class="err" id="c-err" role="alert"></p>
+          <button class="btn" type="submit">Send message</button>
+          <p class="note" style="margin-top:.8rem">This opens your email app with the message ready to send.</p>
         </form>
-       
-    </section>
-    
-  </div>
-  <br>
-  <footer class="separate-footer">
-    <img src="https://i.postimg.cc/zDsPZyp6/Simple-Suits-Store-Black-Logo.jpg" alt="Mawaterna Logo" class="footer-logo" />
-  </footer>  
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <strong>TAG M</strong>, a student project at Applied Science Private University.
+      <ul class="footer-links">
+        <li><a href="health-tools.html">Health Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p>This site shares general information for education. It is not medical advice and does not replace a doctor. In an emergency, contact your local emergency services.</p>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
 </body>
 </html>

@@ -1,67 +1,68 @@
 <!DOCTYPE html>
-<html  dir="ltr">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>About Us</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | TAG M</title>
+  <meta name="description" content="Meet the student team behind TAG M">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  
-  <nav class="navbar">
-    <div class="logo">
-      <a href="index.html"><img src="https://i.postimg.cc/vTr7dZZw/whatsapp-image.jpg" alt="YourLogo" class="logo-img"></a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="TAG M home"><span class="brand-mark" aria-hidden="true"></span><span>TAG M<small>Health &amp; Wellbeing</small></span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="health-tools.html">Health Tools</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="counseling.html">Counseling</a></li>
+          <li><a href="testimonials.html">Stories</a></li>
+          <li><a href="about_us.html" aria-current="page">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about_us.html">About Us</a></li>
-      <li><a href="resources.html" >Resource Hub</a></li>
-      <li><a href="testimonials.html">Success Stories</a></li>
-      <li><a href="counseling.html">Counseling</a></li>
-     <li><a href="Self help tools.html">Self Help Tools</a></li>
-     <li><a href="contact.html">Contact us</a></li>
-    </ul>
-  </nav>
-<br>
-  <main class="container">
-    <h1 >About Us</h1>
+  </header>
 
-    <section class="intro" style="margin-top: 1rem;">
-      <p>
-        We are a group of students from the<strong> Applied Science Private University </strong>united under the name <strong>TAG Masters</strong>. We came together with a shared goal: to support and improve the mental health of our fellow students. Realizing the importance of mental well-being in academic and personal success, we built this platform to provide a safe and supportive space for students seeking mental health resources and support.      </p>
-    </section>
+  <main>
+    <section class="page-hero"><div class="wrap"><h1>About Us</h1><p>A student team making health support easier to reach.</p></div></section>
 
-    <section class="vision-mission" style="margin-top: 2rem;">
-      <h2>Our Vision</h2>
-      <p>
-        A university community where every student feels mentally supported, understood, and empowered to thrive.
-      </p>
-      <h2 style="margin-top: 1.2rem;">Our Mission</h2>
-      <p>
-        To offer accessible mental health tools and services tailored to student needs, and to foster a culture of awareness, support, and care within our university.     </p>
-    </section>
-
-    <section class="values" style="margin-top: 2rem;">
-      <h2>Our Core Values</h2>
-      <ul style="margin-left:  1rem; margin-top: 0.8rem;">
-        <li><strong>Confidentiality:</strong> Your privacy is always respected.</li>
-        <li><strong>Empathy:</strong> We listen and care without judgment.</li>
-        <li><strong>Support:</strong> We're here to walk with you, not ahead of you.</li>
-      </ul>
-    </section>
-
-    <section class="leader" style="margin-top: 2rem;">
-      <h2>Message from Our Team Leader</h2>
-      <p style="margin-top: 0.8rem;">
-        "Everyone deserves to feel heard, supported, and safe. We believe in standing by each person with compassion and kindness."
-        <br>— Team Leader
-      </p>
-    </section>
-
+    <section class="section"><div class="wrap prose">
+      <p>We are a group of students from <strong>Applied Science Private University</strong>, united under the name <strong>TAG M</strong>. We built this platform to give fellow students a safe, simple place to look after their physical and mental health, with free tools, trusted guides and ways to find support.</p>
+    </div></section>
+    <section class="section"><div class="wrap">
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+        <div class="card"><h3>Our vision</h3><p>A university community where every student feels healthy, supported and empowered to thrive.</p></div>
+        <div class="card"><h3>Our mission</h3><p>To offer accessible health tools and information tailored to student needs, and to build a culture of awareness, support and care.</p></div>
+      </div>
+    </div></section>
+    <section class="section"><div class="wrap">
+      <div class="section-intro"><h2>Our values</h2></div>
+      <div class="grid">
+        <div class="card"><h3>Confidentiality</h3><p>Your privacy is respected. Our tools never save what you enter.</p></div>
+        <div class="card"><h3>Empathy</h3><p>We listen and care without judgment.</p></div>
+        <div class="card"><h3>Support</h3><p>We walk with you, not ahead of you.</p></div>
+      </div>
+    </div></section>
+    <section class="section"><div class="wrap"><div class="band"><div><h2>A word from our team leader</h2><p>"Everyone deserves to feel heard, supported and safe. We believe in standing by each person with compassion and kindness."</p></div></div></div></section>
   </main>
-  <br>
-  <footer class="separate-footer">
-    <img src="https://i.postimg.cc/zDsPZyp6/Simple-Suits-Store-Black-Logo.jpg" alt="Mawaterna Logo" class="footer-logo" />
-  </footer>  
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <strong>TAG M</strong>, a student project at Applied Science Private University.
+      <ul class="footer-links">
+        <li><a href="health-tools.html">Health Tools</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <p>This site shares general information for education. It is not medical advice and does not replace a doctor. In an emergency, contact your local emergency services.</p>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
 </body>
 </html>
