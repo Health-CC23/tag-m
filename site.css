@@ -132,3 +132,19 @@ fieldset{border:0;padding:0;margin:0}
 .info-list li{margin:.6rem 0}
 .sr-only{position:absolute;left:-9999px}
 @media(max-width:820px){.tool-grid{grid-template-columns:1fr}}
+
+/* ---- Layout polish: phone menu, hero spacing, large screens ---- */
+@media(max-width:820px){
+  .nav-toggle{margin-left:auto}
+  .hero .wrap{gap:.5rem}
+}
+@media(min-width:1500px){
+  :root{--wrap:1280px}
+  html{font-size:18px}
+  body{font-size:1.0625rem}
+}
+@media(min-width:2200px){
+  :root{--wrap:1500px}
+  html{font-size:21px}
+  .breath{max-width:420px}
+}
