@@ -1,0 +1,17 @@
+/* Arabic (right-to-left) additions for NurseCare. Loaded after site.css. */
+html[dir=rtl] body,html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3,html[dir=rtl] .brand,html[dir=rtl] .nt-big,html[dir=rtl] .breath-text,html[dir=rtl] .orb{font-family:'Cairo',sans-serif}
+html[dir=rtl] body{line-height:1.85}
+html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3{line-height:1.4}
+.help{border-left:0;border-right:6px solid var(--coral)}
+.story{border-left:1px solid var(--line);border-right:6px solid var(--teal-2)}
+.tick li{padding-left:0;padding-right:1.7rem}
+.tick li::before{left:auto;right:0}
+.nav-toggle{margin-left:0;margin-right:auto}
+.nt-card th,.nt-card td{text-align:right}
+.nt-card th{text-transform:none;letter-spacing:0;font-size:.85rem}
+.nt-card details ol,.nt-card details ul{padding-left:0;padding-right:1.3rem}
+.nav-links a.lang-switch{border:1.5px solid var(--teal);color:var(--teal);font-family:Nunito,sans-serif}
+.nav-links a.lang-switch:hover{background:var(--mint)}
+.field input,.field textarea,.field select{text-align:start}
+input[type=number],input[type=search]{text-align:start}
+bdi{unicode-bidi:isolate}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتصل بنا | NurseCare</title>
+  <meta name="description" content="نحن هنا للمساعدة. تواصل معنا في أي وقت وسنرد عليك.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Nunito:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="ar.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index-ar.html" aria-label="الصفحة الرئيسية لـ NurseCare"><span class="brand-mark" aria-hidden="true"></span><span>NurseCare<small>الصحة والعافية</small></span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">القائمة</button>
+      <nav aria-label="القائمة الرئيسية">
+        <ul class="nav-links" id="menu">
+          <li><a href="index-ar.html">الرئيسية</a></li>
+          <li><a href="health-tools-ar.html">أدوات الصحة</a></li>
+          <li><a href="resources-ar.html">المصادر</a></li>
+          <li><a href="counseling-ar.html">الاستشارة</a></li>
+          <li><a href="testimonials-ar.html">قصص الطلاب</a></li>
+          <li><a href="about_us-ar.html">من نحن</a></li>
+          <li><a href="contact-ar.html" aria-current="page">اتصل بنا</a></li>
+          <li><a href="contact.html" lang="en" hreflang="en" class="lang-switch">English</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero"><div class="wrap"><h1>اتصل بنا</h1><p>نحن هنا للمساعدة. تواصل معنا في أي وقت وسنرد عليك.</p></div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="tool-grid">
+        <div class="panel">
+          <h2>تواصل معنا</h2>
+          <ul class="info-list">
+            <li><strong>البريد الإلكتروني:</strong> <a href="mailto:tagmasters@support.com" dir="ltr">NurseCare@support.com</a></li>
+            <li><strong>الهاتف:</strong> <a href="tel:065216161" dir="ltr">065216161</a></li>
+            <li><strong>العنوان:</strong> جامعة الزيتونة الأردنية، عمّان، الأردن</li>
+            <li><strong>ساعات العمل:</strong> من 8:00 صباحاً إلى 10:00 مساءً</li>
+          </ul>
+          <p class="note">هذا مشروع طلابي وليس خط أزمات. في حالات الطوارئ، اتصل بخدمات الطوارئ المحلية.</p>
+        </div>
+        <form class="panel" id="contact-form" novalidate>
+          <h2>أرسل لنا رسالة</h2>
+          <div class="field"><label for="c-name">اسمك</label><input id="c-name" type="text" required></div>
+          <div class="field"><label for="c-email">بريدك الإلكتروني</label><input id="c-email" type="email" required dir="ltr"></div>
+          <div class="field"><label for="c-sub">الموضوع</label><input id="c-sub" type="text" required></div>
+          <div class="field"><label for="c-msg">الرسالة</label><textarea id="c-msg" required></textarea></div>
+          <p class="err" id="c-err" role="alert"></p>
+          <button class="btn" type="submit">إرسال الرسالة</button>
+          <p class="note" style="margin-top:.8rem">سيفتح هذا تطبيق البريد لديك مع الرسالة جاهزة للإرسال.</p>
+        </form>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <strong>NurseCare</strong>، مشروع طلابي في جامعة العلوم التطبيقية الخاصة.
+      <ul class="footer-links">
+        <li><a href="health-tools-ar.html">أدوات الصحة</a></li>
+        <li><a href="resources-ar.html">المصادر</a></li>
+        <li><a href="about_us-ar.html">من نحن</a></li>
+        <li><a href="contact-ar.html">اتصل بنا</a></li>
+      </ul>
+      <p>يقدم هذا الموقع معلومات عامة لأغراض تعليمية. وهو ليس نصيحة طبية ولا يغني عن الطبيب. في حالات الطوارئ، اتصل بخدمات الطوارئ المحلية.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var t=document.querySelector('.nav-toggle'),l=document.querySelector('.nav-links');
+    if(t&&l){t.addEventListener('click',function(){var o=l.classList.toggle('open');t.setAttribute('aria-expanded',o)})}
+    var f=document.getElementById('contact-form');
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var $=function(i){return document.getElementById(i).value.trim()};
+      var n=$('c-name'),em=$('c-email'),s=$('c-sub'),m=$('c-msg');
+      if(!n||!em||!s||!m||!/^\S+@\S+\.\S+$/.test(em)){document.getElementById('c-err').textContent='يرجى تعبئة جميع الحقول وإدخال بريد إلكتروني صحيح.';return}
+      document.getElementById('c-err').textContent='';
+      var body=m+'\n\nFrom: '+n+' ('+em+')';
+      window.location.href='mailto:tagmasters@support.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(body);
+    });
+  })();
+  </script>
+</body>
+</html>

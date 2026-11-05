@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أدوات الصحة | NurseCare</title>
+  <meta name="description" content="حاسبة جرعات، قيم مخبرية طبيعية، محوّل وحدات، علامات حيوية، نصائح رعاية منزلية ومتتبع لضغط الدم والسكر.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Nunito:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    /* Health Tools tabs and tools */
+    .nt-tabs{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 0 .8rem;scrollbar-width:none}
+    .nt-tabs::-webkit-scrollbar{display:none}
+    .nt-tabs button{flex:none;border:2px solid var(--teal);background:#fff;color:var(--teal);font:700 1rem Cairo,sans-serif;border-radius:999px;padding:.4rem 1.1rem;cursor:pointer;white-space:nowrap}
+    .nt-tabs button[aria-selected=true]{background:var(--teal);color:#fff}
+    .nt-panel{display:none;max-width:760px;margin:0 auto}
+    .nt-panel.on{display:block}
+    .nt-card{background:#fff;border:1px solid var(--line);border-top:6px solid var(--teal-2);border-radius:20px;padding:1.4rem}
+    .nt-card h3{font-size:1.1rem;margin:1.2rem 0 .3rem}
+    .nt-card label{display:block;margin:.8rem 0 .25rem}
+    .nt-card input[type=search],.nt-card input[type=datetime-local]{font:inherit;color:var(--ink);padding:.55rem .8rem;border:1.5px solid #b9d3ce;border-radius:10px;background:#fff;width:100%}
+    .nt-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .nt-res{margin-top:1rem;padding:.9rem 1rem;border-radius:14px;background:#e6f6ec;border:1px solid #bfe3cd}
+    .nt-res.warn{background:#fff4d6;border-color:#f0d98a}
+    .nt-res.bad{background:#fde8e3;border-color:#f3c0b5}
+    .nt-big{font:800 1.7rem Nunito,sans-serif;color:var(--teal)}
+    .nt-disc{margin-top:1rem;padding:.7rem 1rem;border-radius:12px;background:#fff4d6;border:1px solid #f0d98a;font-size:.92rem}
+    .nt-card table{width:100%;border-collapse:collapse;font-size:.95rem}
+    .nt-card th,.nt-card td{padding:.5rem .4rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .nt-card th{color:var(--teal);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+    .nt-tw{overflow-x:auto}
+    .nt-cat{margin:1.2rem 0 .2rem;font-weight:700;color:var(--teal-2)}
+    .chip{display:inline-block;border-radius:999px;padding:.05rem .75rem;font-weight:700;font-size:.8rem}
+    .c-ok{background:#e6f6ec;color:#237a45}.c-warn{background:#fff4d6;color:#8a5f00}.c-bad{background:#fde8e3;color:#b23a22}.c-low{background:#e3eefa;color:#245f9c}
+    .nt-card details{border:1px solid var(--line);border-radius:14px;padding:.1rem 1rem;margin:.7rem 0;background:#fff}
+    .nt-card summary{cursor:pointer;font-weight:700;padding:.6rem 0;color:var(--teal)}
+    .nt-card details ol,.nt-card details ul{margin:.2rem 0 .8rem;padding-left:1.3rem}
+    .nt-card details li{margin:.3rem 0}
+    .nt-ref{display:grid;gap:.5rem;margin-top:.4rem}
+    .nt-ref div{padding:.5rem .8rem;border-radius:10px;font-size:.95rem}
+    .nt-row{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+    .nt-card svg.chart{width:100%;height:auto;display:block;background:#fbfefd;border:1px solid var(--line);border-radius:14px}
+    .nt-stat{color:#5b7573;font-size:.9rem;margin-top:.4rem}
+    .nt-x{border:0;background:none;color:#b23a22;font-size:1.1rem;cursor:pointer;font-weight:700}
+    .btn.sm{padding:.3rem .9rem;font-size:.9rem}
+    @media(max-width:520px){.nt-2{grid-template-columns:1fr}}
+  </style>
+  <link rel="stylesheet" href="ar.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index-ar.html" aria-label="الصفحة الرئيسية لـ NurseCare"><span class="brand-mark" aria-hidden="true"></span><span>NurseCare<small>الصحة والعافية</small></span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu">القائمة</button>
+      <nav aria-label="القائمة الرئيسية">
+        <ul class="nav-links" id="menu">
+          <li><a href="index-ar.html">الرئيسية</a></li>
+          <li><a href="health-tools-ar.html" aria-current="page">أدوات الصحة</a></li>
+          <li><a href="resources-ar.html">المصادر</a></li>
+          <li><a href="counseling-ar.html">الاستشارة</a></li>
+          <li><a href="testimonials-ar.html">قصص الطلاب</a></li>
+          <li><a href="about_us-ar.html">من نحن</a></li>
+          <li><a href="contact-ar.html">اتصل بنا</a></li>
+          <li><a href="health-tools.html" lang="en" hreflang="en" class="lang-switch">English</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero"><div class="wrap"><h1>أدوات الصحة</h1><p>حاسبات ومراجع سريعة للرعاية اليومية. القراءات التي تحفظها تبقى على جهازك.</p></div></section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="nt-tabs" role="tablist" aria-label="الأدوات" id="nt-tabs">
+          <button role="tab" data-tab="dose" aria-selected="true">الجرعة</button>
+          <button role="tab" data-tab="labs" aria-selected="false">القيم المخبرية</button>
+          <button role="tab" data-tab="units" aria-selected="false">الوحدات</button>
+          <button role="tab" data-tab="vitals" aria-selected="false">العلامات الحيوية</button>
+          <button role="tab" data-tab="care" aria-selected="false">الرعاية المنزلية</button>
+          <button role="tab" data-tab="track" aria-selected="false">متتبع الضغط والسكر</button>
+        </div>
+
+        <div class="nt-panel on" id="p-dose"><div class="nt-card">
+          <h2>حاسبة الجرعة</h2>
+          <p class="note">تحسب جرعة حسب الوزن من قيمة ملغ/كغ المذكورة في الوصفة أو على العبوة.</p>
+          <div class="nt-2">
+            <div><label for="dw">الوزن</label><input id="dw" type="number" inputmode="decimal" min="0" step="any" placeholder="مثال: 20"></div>
+            <div><label for="dwu">الوحدة</label><select id="dwu"><option value="kg">كغ</option><option value="lb">رطل</option></select></div>
+          </div>
+          <label for="dpk">الجرعة لكل كغ (ملغ/كغ لكل جرعة)</label><input id="dpk" type="number" inputmode="decimal" min="0" step="any" placeholder="من الوصفة أو العبوة">
+          <label for="dfr">عدد الجرعات يومياً</label><input id="dfr" type="number" inputmode="numeric" min="1" step="1" placeholder="مثال: 3">
+          <div class="nt-2">
+            <div><label for="dms">أقصى جرعة مفردة (ملغ)، اختياري</label><input id="dms" type="number" inputmode="decimal" min="0" step="any"></div>
+            <div><label for="dmd">أقصى جرعة يومية (ملغ)، اختياري</label><input id="dmd" type="number" inputmode="decimal" min="0" step="any"></div>
+          </div>
+          <label for="dc">التركيز (ملغ لكل 1 مل)، اختياري، للسوائل</label><input id="dc" type="number" inputmode="decimal" min="0" step="any" placeholder="مثال: 24 (120 ملغ / 5 مل = 24)">
+          <button class="btn" id="dbtn" type="button" style="margin-top:1rem">احسب</button>
+          <div id="dout" aria-live="polite"></div>
+          <div class="nt-disc">للمساعدة فقط. تحقق دائماً من الجرعة والدواء وطريقة الإعطاء مع الطبيب أو الصيدلاني أو من ملصق المنتج قبل إعطاء أي دواء.</div>
+        </div></div>
+
+        <div class="nt-panel" id="p-labs"><div class="nt-card">
+          <h2>القيم المخبرية الطبيعية</h2>
+          <p class="note">مديات مرجعية نموذجية للبالغين. تختلف المديات بين المختبرات، لذا اعتمد دائماً المدى المطبوع على تقرير المختبر. (<bdi dir="ltr">M</bdi> = ذكور، <bdi dir="ltr">F</bdi> = إناث)</p>
+          <label for="lsearch" class="sr-only">ابحث في الفحوصات المخبرية</label>
+          <input id="lsearch" type="search" placeholder="بحث (مثال: صوديوم، Hb)">
+          <div id="labsOut"></div>
+        </div></div>
+
+        <div class="nt-panel" id="p-units"><div class="nt-card">
+          <h2>محوّل الوحدات</h2>
+          <p class="note">تحويلات سريعة مستخدمة في الرعاية اليومية.</p>
+          <label for="ucat">النوع</label><select id="ucat"></select>
+          <div class="nt-2">
+            <div><label for="uval">القيمة</label><input id="uval" type="number" inputmode="decimal" step="any" placeholder="0"></div>
+            <div><label for="ufrom">من</label><select id="ufrom"></select></div>
+          </div>
+          <label for="uto">إلى</label><select id="uto"></select>
+          <div id="uout" class="nt-res" style="display:none" aria-live="polite"></div>
+          <div class="nt-disc">الملعقة الصغيرة والكبيرة تقريبية. استخدم محقنة قياس للأدوية السائلة.</div>
+        </div></div>
+
+        <div class="nt-panel" id="p-vitals"><div class="nt-card">
+          <h2>العلامات الحيوية الطبيعية</h2>
+          <p class="note">مديات تقريبية أثناء الراحة حسب الفئة العمرية.</p>
+          <div class="nt-tw"><table id="vtab"></table></div>
+          <h3>جميع الأعمار</h3>
+          <div class="nt-ref">
+            <div style="background:#e6f6ec">درجة الحرارة: من <bdi dir="ltr">36.1</bdi> إلى <bdi dir="ltr">37.2</bdi> °م (<bdi dir="ltr">97</bdi> إلى <bdi dir="ltr">99</bdi> °ف). الحمى عند <bdi dir="ltr">38</bdi> °م (<bdi dir="ltr">100.4</bdi> °ف) أو أعلى.</div>
+            <div style="background:#e6f6ec">تشبع الأكسجين (SpO₂): من <bdi dir="ltr">95</bdi> إلى <bdi dir="ltr">100</bdi> %. أقل من <bdi dir="ltr">92</bdi> % يحتاج عناية طبية عاجلة.</div>
+            <div style="background:#e3eefa">مقياس الألم: من <bdi dir="ltr">0</bdi> (لا ألم) إلى <bdi dir="ltr">10</bdi> (الأسوأ). أعد التقييم بعد كل تدخل.</div>
+          </div>
+          <h3>فئات ضغط الدم للبالغين</h3>
+          <div class="nt-ref" id="bpRef"></div>
+          <h3>سكر الدم (للبالغين، mg/dL)</h3>
+          <div class="nt-ref" id="sgRef"></div>
+          <div class="nt-disc">المديات إرشادية. المرضى المصابون بأمراض مزمنة يتبعون الأهداف التي حددها طبيبهم.</div>
+        </div></div>
+
+        <div class="nt-panel" id="p-care"><div class="nt-card">
+          <h2>نصائح الرعاية المنزلية</h2>
+          <p class="note">العناية بالجروح والحقن في المنزل. اتبع تعليمات طبيبك أو ممرضك أولاً.</p>
+          <div id="careOut"></div>
+          <div class="nt-disc">معلومات تعليمية فقط. لا تغني عن الفحص الطبي. في حالة الطوارئ اتصل برقم الطوارئ المحلي (<bdi dir="ltr">911</bdi> في الأردن).</div>
+        </div></div>
+
+        <div class="nt-panel" id="p-track"><div class="nt-card">
+          <h2>متتبع ضغط الدم والسكر</h2>
+          <p class="note">قراءاتك تُحفظ على هذا الجهاز فقط. لا يوجد حساب ولا يُرفع أي شيء.</p>
+          <div class="seg" id="tseg" role="group" aria-label="نوع القراءة"><button type="button" data-ty="bp" aria-pressed="true">ضغط الدم</button><button type="button" data-ty="sg" aria-pressed="false">سكر الدم</button></div>
+
+          <div id="fbp">
+            <div class="nt-2">
+              <div><label for="bsys">الانقباضي (العلوي)</label><input id="bsys" type="number" inputmode="numeric" placeholder="120" dir="ltr"></div>
+              <div><label for="bdia">الانبساطي (السفلي)</label><input id="bdia" type="number" inputmode="numeric" placeholder="80" dir="ltr"></div>
+            </div>
+            <label for="bpul">النبض (اختياري)</label><input id="bpul" type="number" inputmode="numeric" placeholder="72" dir="ltr">
+          </div>
+          <div id="fsg" style="display:none">
+            <div class="nt-2">
+              <div><label for="gval">القراءة</label><input id="gval" type="number" inputmode="decimal" step="any" placeholder="100" dir="ltr"></div>
+              <div><label for="gunit">الوحدة</label><select id="gunit"><option value="mgdl">mg/dL</option><option value="mmol">mmol/L</option></select></div>
+            </div>
+            <label for="gtype">متى تم القياس؟</label>
+            <select id="gtype"><option value="fast">صائم (8 ساعات أو أكثر)</option><option value="pre">قبل الوجبة</option><option value="post">بعد ساعتين من الوجبة</option><option value="bed">وقت النوم</option><option value="rand">عشوائي</option></select>
+          </div>
+          <label for="twhen">التاريخ والوقت</label><input id="twhen" type="datetime-local">
+          <label for="tnote">ملاحظة (اختياري)</label><input id="tnote" type="text" placeholder="مثال: بعد المشي">
+          <button class="btn" id="tadd" type="button" style="margin-top:1rem">حفظ القراءة</button>
+          <div id="tres" aria-live="polite"></div>
+
+          <h3>المخطط</h3>
+          <div id="chart" dir="ltr"></div>
+          <div class="nt-stat" id="tstat"></div>
+
+          <h3>السجل</h3>
+          <div class="nt-tw"><table id="ttab"></table></div>
+          <button class="btn btn-ghost sm" id="tclr" type="button" style="margin-top:.8rem">مسح هذه القائمة</button>
+          <p class="note" id="tclrmsg" aria-live="polite"></p>
+          <div class="nt-disc">هذا المتتبع ليس تشخيصاً. شارك قراءاتك مع طبيبك. القراءات المرتفعة جداً أو المنخفضة جداً مع أعراض تحتاج رعاية عاجلة.</div>
+        </div></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <strong>NurseCare</strong>، مشروع طلابي في جامعة العلوم التطبيقية الخاصة.
+      <ul class="footer-links">
+        <li><a href="health-tools-ar.html">أدوات الصحة</a></li>
+        <li><a href="resources-ar.html">المصادر</a></li>
+        <li><a href="about_us-ar.html">من نحن</a></li>
+        <li><a href="contact-ar.html">اتصل بنا</a></li>
+      </ul>
+      <p>يقدم هذا الموقع معلومات عامة لأغراض تعليمية. وهو ليس نصيحة طبية ولا يغني عن الطبيب. في حالات الطوارئ، اتصل بخدمات الطوارئ المحلية.</p>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+  <script>
+  (function(){
+    var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+    var fmt=function(n){return String(+Number(n).toFixed(2))};
+    var store={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+    /* Status chips */
+    var ST={
+      normal:['c-ok','طبيعي'],elev:['c-warn','مرتفع قليلاً'],s1:['c-warn','ارتفاع، المرحلة 1'],s2:['c-bad','ارتفاع، المرحلة 2'],
+      crisis:['c-bad','أزمة ارتفاع ضغط الدم، اطلب رعاية عاجلة'],low:['c-low','منخفض'],pre:['c-warn','مدى ما قبل السكري'],
+      hi:['c-bad','مرتفع (مدى السكري)'],hypo:['c-low','انخفاض السكر (نقص سكر الدم)'],sev:['c-bad','منخفض جداً، تصرّف الآن']
+    };
+    var chip=function(k){return '<span class="chip '+ST[k][0]+'">'+ST[k][1]+'</span>'};
+    function bpClass(s,d){
+      if(s>180||d>120)return'crisis';if(s<90||d<60)return'low';
+      if(s>=140||d>=90)return's2';if(s>=130||d>=80)return's1';if(s>=120)return'elev';return'normal';}
+    function sgClass(v,ty){
+      if(v<54)return'sev';if(v<70)return'hypo';
+      if(ty==='fast'||ty==='pre'){if(v<=99)return'normal';if(v<=125)return'pre';return'hi';}
+      if(v<140)return'normal';if(v<200)return'pre';return'hi';}
+
+    /* Tabs */
+    $$('#nt-tabs button').forEach(function(b){b.addEventListener('click',function(){
+      $$('#nt-tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      $$('.nt-panel').forEach(function(p){p.classList.toggle('on',p.id==='p-'+b.dataset.tab)});
+    })});
+
+    /* Dose */
+    $('#dbtn').addEventListener('click',function(){
+      var w=parseFloat($('#dw').value);if($('#dwu').value==='lb'&&w>0)w*=0.45359237;
+      var dpk=parseFloat($('#dpk').value),fr=parseFloat($('#dfr').value),ms=parseFloat($('#dms').value),md=parseFloat($('#dmd').value),c=parseFloat($('#dc').value),o=$('#dout');
+      if(!(w>0&&dpk>0&&fr>0)){o.innerHTML='<div class="nt-res warn">يرجى إدخال الوزن والجرعة لكل كغ وعدد الجرعات يومياً.</div>';return;}
+      var dose=w*dpk,msgs=[],cls='nt-res';
+      if(ms>0&&dose>ms){dose=ms;msgs.push('الجرعة المحسوبة تجاوزت أقصى جرعة مفردة، لذلك تم تحديدها عند الحد الأقصى.');cls='nt-res warn';}
+      var daily=dose*fr;
+      if(md>0&&daily>md){msgs.push('الجرعة اليومية الإجمالية أعلى من الحد الأقصى اليومي. لا تعطِ الدواء. أقصى جرعة لكل مرة بهذا التكرار هي <b>'+fmt(md/fr)+' ملغ</b>.');cls='nt-res bad';}
+      var h='<div class="'+cls+'"><div>الجرعة لكل مرة: <span class="nt-big">'+fmt(dose)+' ملغ</span></div>';
+      if(c>0)h+='<div>الحجم لكل جرعة: <b>'+fmt(dose/c)+' مل</b></div>';
+      h+='<div>الإجمالي يومياً: <b>'+fmt(daily)+' ملغ</b> ('+fmt(fr)+' جرعات)</div><div class="nt-stat">الوزن المستخدم: '+fmt(w)+' كغ</div>';
+      msgs.forEach(function(m){h+='<div style="margin-top:.5rem"><b>'+m+'</b></div>'});
+      o.innerHTML=h+'</div>';
+    });
+
+    /* Labs */
+    var LABS=[
+      ['صورة الدم الكاملة (CBC)',[['الهيموغلوبين (Hb)','M 13.5–17.5 · F 12.0–15.5 g/dL'],['الهيماتوكريت (Hct)','M 41–50 % · F 36–44 %'],['كريات الدم البيضاء (WBC)','4.0–11.0 ×10³/µL'],['الصفائح الدموية (Platelets)','150–400 ×10³/µL'],['كريات الدم الحمراء (RBC)','M 4.7–6.1 · F 4.2–5.4 ×10⁶/µL'],['متوسط حجم الكرية (MCV)','80–100 fL']]],
+      ['الشوارد (Electrolytes)',[['الصوديوم (Na⁺)','135–145 mmol/L'],['البوتاسيوم (K⁺)','3.5–5.0 mmol/L'],['الكلوريد (Cl⁻)','98–106 mmol/L'],['البيكربونات (HCO₃⁻)','22–29 mmol/L'],['الكالسيوم (الكلي)','8.5–10.5 mg/dL'],['المغنيسيوم (Magnesium)','1.7–2.2 mg/dL'],['الفوسفات (Phosphate)','2.5–4.5 mg/dL']]],
+      ['وظائف الكلى (Kidney)',[['الكرياتينين (Creatinine)','M 0.7–1.3 · F 0.6–1.1 mg/dL'],['نيتروجين اليوريا (BUN)','7–20 mg/dL'],['معدل الترشيح (eGFR)','&gt; 90 mL/min/1.73m²'],['حمض اليوريك (Uric acid)','M 3.4–7.0 · F 2.4–6.0 mg/dL']]],
+      ['وظائف الكبد (Liver)',[['ALT (SGPT)','7–56 U/L'],['AST (SGOT)','10–40 U/L'],['ALP','44–147 U/L'],['البيليروبين الكلي (Bilirubin)','0.1–1.2 mg/dL'],['الألبومين (Albumin)','3.5–5.0 g/dL'],['البروتين الكلي (Total protein)','6.0–8.3 g/dL']]],
+      ['السكري (Diabetes)',[['سكر الصيام (Fasting glucose)','70–99 mg/dL','<bdi dir="ltr">100–125</bdi> ما قبل السكري · <bdi dir="ltr">≥126</bdi> سكري'],['السكر بعد ساعتين من الوجبة','&lt; 140 mg/dL'],['HbA1c','&lt; 5.7 %','<bdi dir="ltr">5.7–6.4</bdi> ما قبل السكري · <bdi dir="ltr">≥6.5</bdi> سكري']]],
+      ['الدهون (Lipids)',[['الكوليسترول الكلي (Total cholesterol)','&lt; 200 mg/dL'],['LDL','&lt; 100 mg/dL'],['HDL','M &gt; 40 · F &gt; 50 mg/dL'],['الدهون الثلاثية (Triglycerides)','&lt; 150 mg/dL']]],
+      ['التخثر والغدة الدرقية',[['INR','0.8–1.1','عند استخدام الوارفارين عادةً <bdi dir="ltr">2.0–3.0</bdi>'],['PT','11–13.5 s'],['aPTT','25–35 s'],['TSH','0.4–4.0 mIU/L']]],
+      ['غازات الدم الشرياني (ABG)',[['pH','7.35–7.45'],['PaCO₂','35–45 mmHg'],['PaO₂','80–100 mmHg'],['HCO₃⁻','22–26 mmol/L'],['SaO₂','95–100 %'],['اللاكتات (Lactate)','0.5–2.0 mmol/L']]]
+    ];
+    function renderLabs(){
+      var q=$('#lsearch').value.trim().toLowerCase(),h='',any=false;
+      LABS.forEach(function(g){
+        var rows=g[1].filter(function(r){return !q||(r[0]+' '+g[0]).toLowerCase().indexOf(q)>-1});
+        if(!rows.length)return;any=true;
+        h+='<div class="nt-cat">'+g[0]+'</div><div class="nt-tw"><table><tr><th>الفحص</th><th>المدى الطبيعي</th></tr>'+rows.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td><bdi dir="ltr">'+r[1]+'</bdi>'+(r[2]?'<br><span class="nt-stat">'+r[2]+'</span>':'')+'</td></tr>'}).join('')+'</table></div>';
+      });
+      $('#labsOut').innerHTML=any?h:'<p class="note">لا توجد نتائج</p>';
+    }
+    $('#lsearch').addEventListener('input',renderLabs);renderLabs();
+
+    /* Units */
+    var lin=function(f){return{to:function(x){return x*f},from:function(x){return x/f}}};
+    var UN={
+      mass:['الوزن / الكتلة',{mcg:lin(1e-6),mg:lin(1e-3),g:lin(1),kg:lin(1000),lb:lin(453.592),oz:lin(28.3495)}],
+      vol:['الحجم',{mL:lin(1),L:lin(1000),tsp:lin(5),tbsp:lin(15),'fl oz':lin(29.5735)}],
+      temp:['درجة الحرارة',{'°C':{to:function(x){return x},from:function(x){return x}},'°F':{to:function(x){return (x-32)*5/9},from:function(x){return x*9/5+32}},'K':{to:function(x){return x-273.15},from:function(x){return x+273.15}}}],
+      len:['الطول / القامة',{cm:lin(1),m:lin(100),'in':lin(2.54),ft:lin(30.48)}],
+      glu:['الجلوكوز',{'mg/dL':lin(1),'mmol/L':lin(18.016)}],
+      cre:['الكرياتينين',{'mg/dL':lin(1),'µmol/L':lin(1/88.4)}],
+      cho:['الكوليسترول',{'mg/dL':lin(1),'mmol/L':lin(38.67)}]
+    };
+    $('#ucat').innerHTML=Object.keys(UN).map(function(k){return '<option value="'+k+'">'+UN[k][0]+'</option>'}).join('');
+    function fillUnits(){
+      var ks=Object.keys(UN[$('#ucat').value][1]),o=ks.map(function(k){return '<option>'+k+'</option>'}).join('');
+      $('#ufrom').innerHTML=o;$('#uto').innerHTML=o;if(ks[1])$('#uto').value=ks[1];convert();
+    }
+    function convert(){
+      var u=UN[$('#ucat').value][1],v=parseFloat($('#uval').value),o=$('#uout');
+      if(isNaN(v)){o.style.display='none';return;}
+      var f=$('#ufrom').value,to=$('#uto').value,r=u[to].from(u[f].to(v));
+      o.style.display='block';o.innerHTML='<bdi dir="ltr">'+fmt(v)+' '+f+' = <span class="nt-big">'+(+r.toPrecision(6))+' '+to+'</span></bdi>';
+    }
+    $('#ucat').addEventListener('change',fillUnits);$('#ufrom').addEventListener('change',convert);$('#uto').addEventListener('change',convert);$('#uval').addEventListener('input',convert);fillUnits();
+
+    /* Vitals */
+    var VT=[['حديث الولادة (<bdi dir="ltr">0–1</bdi> شهر)','100–180','30–60','60–90'],['رضيع (<bdi dir="ltr">1–12</bdi> شهراً)','100–160','30–60','70–100'],['طفل صغير (<bdi dir="ltr">1–3</bdi> سنوات)','90–150','24–40','80–110'],['ما قبل المدرسة (<bdi dir="ltr">3–6</bdi> سنوات)','80–140','22–34','80–110'],['سن المدرسة (<bdi dir="ltr">6–12</bdi> سنة)','70–120','18–30','90–120'],['مراهق (<bdi dir="ltr">12–18</bdi> سنة)','60–100','12–20','100–130'],['بالغ','60–100','12–20','90–120'],['كبير السن (<bdi dir="ltr">65+</bdi>)','60–100','12–25','&lt; 130']];
+    $('#vtab').innerHTML='<tr><th>العمر</th><th>معدل القلب (نبضة/دقيقة)</th><th>معدل التنفس (/دقيقة)</th><th>الضغط الانقباضي (mmHg)</th></tr>'+VT.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td><bdi dir="ltr">'+r[1]+'</bdi></td><td><bdi dir="ltr">'+r[2]+'</bdi></td><td><bdi dir="ltr">'+r[3]+'</bdi></td></tr>'}).join('');
+    var bp=[['normal','< 120 / < 80'],['elev','120–129 / < 80'],['s1','130–139 / 80–89'],['s2','≥ 140 / ≥ 90'],['crisis','> 180 / > 120'],['low','< 90 / < 60']];
+    var bg={'c-ok':'#e6f6ec','c-warn':'#fff4d6','c-bad':'#fde8e3','c-low':'#e3eefa'};
+    $('#bpRef').innerHTML=bp.map(function(p){return '<div class="nt-row" style="background:'+bg[ST[p[0]][0]]+'"><b>'+ST[p[0]][1]+'</b><span><bdi dir="ltr">'+p[1]+' mmHg</bdi></span></div>'}).join('');
+    var sg=[['hypo','<bdi dir="ltr">&lt; 70</bdi>'],['normal','صائم <bdi dir="ltr">70–99</bdi> · بعد ساعتين من الوجبة <bdi dir="ltr">&lt; 140</bdi>'],['pre','صائم <bdi dir="ltr">100–125</bdi> · بعد ساعتين من الوجبة <bdi dir="ltr">140–199</bdi>'],['hi','صائم <bdi dir="ltr">≥ 126</bdi> · بعد ساعتين من الوجبة <bdi dir="ltr">≥ 200</bdi>']];
+    $('#sgRef').innerHTML=sg.map(function(p){return '<div class="nt-row" style="background:'+bg[ST[p[0]][0]]+'"><b>'+ST[p[0]][1]+'</b><span>'+p[1]+'</span></div>'}).join('');
+
+    /* Home care */
+    var CARE=[
+      ['جروح وخدوش بسيطة',true,['اغسل يديك بالماء والصابون (أو ارتدِ قفازات نظيفة).','أوقف النزيف بالضغط بقوة بقطعة قماش أو شاش نظيف لمدة 10 دقائق. ارفع المنطقة فوق مستوى القلب.','اشطف الجرح تحت ماء جارٍ نظيف أو محلول ملحي لعدة دقائق لإزالة الأوساخ.','نظّف الجلد حول الجرح بصابون لطيف. تجنب وضع فوق أكسيد الهيدروجين أو المطهرات القوية داخل الجرح.','غطِّه بضماد أو رباط نظيف غير لاصق.','بدّل الضماد مرة يومياً أو كلما تبلل أو اتسخ. حافظ على الجرح نظيفاً وجافاً.']],
+      ['علامات العدوى',false,['زيادة الاحمرار أو التورم أو الحرارة أو الألم بعد أول يوم أو يومين.','خروج صديد أو رائحة كريهة من الجرح.','خطوط حمراء تنتشر من الجرح، أو حمى.']],
+      ['راجع الطبيب فوراً إذا',false,['لم يتوقف النزيف بعد 10 إلى 15 دقيقة من الضغط القوي.','كان الجرح عميقاً أو واسعاً أو مفتوحاً، أو في الوجه أو فوق مفصل، أو قد يحتاج إلى غرز.','كان سببه عضة حيوان أو إنسان، أو جسم صدئ أو متسخ، أو لم تتلقَّ لقاح الكزاز خلال آخر 5 إلى 10 سنوات.','كان المصاب مصاباً بالسكري أو ضعف الدورة الدموية أو ضعف المناعة.']],
+      ['إعطاء حقنة في المنزل (تحت الجلد، مثل الإنسولين)',true,['احقن فقط الأدوية الموصوفة، وبعد أن يعلّمك ممرض أو طبيب كيفية ذلك.','اغسل يديك. تحقق من اسم الدواء والجرعة وتاريخ الانتهاء ومن أن السائل يبدو طبيعياً (دون عكارة أو جسيمات، إلا إذا كان من المفترض أن يكون عكراً).','استخدم إبرة ومحقنة جديدتين في كل مرة. لا تشارك الإبر أو الأقلام أبداً.','اختر موضع الحقن (البطن أو الفخذ الخارجي أو الجزء الخلفي من أعلى الذراع) وبدّل المواضع في كل مرة. تجنب المناطق المكدومة أو الصلبة أو المتكتلة.','نظّف الجلد بمسحة كحول واتركه يجف تماماً.','أدخل الإبرة كما تعلمت (عادةً بزاوية 90° مع إبر الأقلام القصيرة، أو 45° إذا كانت الدهون قليلة)، وادفع المكبس ببطء، وانتظر نحو 10 ثوانٍ، ثم اسحبها.','لا تفرك المنطقة. اضغط برفق بقطنة نظيفة إذا ظهرت قطرة دم.','لا تعد الغطاء إلى الإبرة. ضع الإبرة المستعملة مباشرة في حاوية الأدوات الحادة (أو زجاجة بلاستيكية صلبة بغطاء).','اغسل يديك ودوّن الجرعة والوقت.']],
+      ['مشاكل الحقن: اتصل بطبيبك',false,['احمرار أو حرارة أو صديد أو ألم متزايد في موضع الحقن.','طفح جلدي أو تورم الوجه أو الشفتين أو صعوبة في التنفس (حساسية محتملة): اتصل بخدمات الطوارئ فوراً.','علامات انخفاض السكر بعد الإنسولين (ارتعاش، تعرق، ارتباك): اتبع خطة السكري الخاصة بك واطلب المساعدة.']]
+    ];
+    $('#careOut').innerHTML=CARE.map(function(s,i){var tag=s[1]?'ol':'ul';return '<details'+(i===0?' open':'')+'><summary>'+s[0]+'</summary><'+tag+'>'+s[2].map(function(x){return '<li>'+x+'</li>'}).join('')+'</'+tag+'></details>'}).join('');
+
+    /* Tracker */
+    var ttype='bp';
+    var DB=function(){return store.get('nursecare_tracker_v1',{bp:[],sg:[]})},saveDB=function(d){store.set('nursecare_tracker_v1',d)};
+    var nowLocal=function(){var d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+    var dtf=function(ts){return new Date(ts).toLocaleString('en-GB',{dateStyle:'short',timeStyle:'short'})};
+    var GT={fast:'صائم',pre:'قبل الوجبة',post:'بعد ساعتين من الوجبة',bed:'وقت النوم',rand:'عشوائي'};
+    var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};
+    function addReading(){
+      var db=DB(),ts=new Date($('#twhen').value||Date.now()).getTime(),note=$('#tnote').value.trim(),res=$('#tres');
+      if(ttype==='bp'){
+        var s=parseFloat($('#bsys').value),d=parseFloat($('#bdia').value),p=parseFloat($('#bpul').value);
+        if(!(s>0&&d>0)||s<=d||s>300||d>200){res.innerHTML='<div class="nt-res warn">الرجاء إدخال أرقام صحيحة.</div>';return;}
+        db.bp.push({id:Date.now(),ts:ts,s:s,d:d,p:p>0?p:null,note:note});
+        res.innerHTML='<div class="nt-res">تم الحفظ: <b>'+s+'/'+d+'</b> '+chip(bpClass(s,d))+'</div>';
+        $('#bsys').value=$('#bdia').value=$('#bpul').value='';
+      }else{
+        var v=parseFloat($('#gval').value);if($('#gunit').value==='mmol')v*=18.016;
+        if(!(v>10&&v<1000)){res.innerHTML='<div class="nt-res warn">الرجاء إدخال أرقام صحيحة.</div>';return;}
+        v=Math.round(v);var ty=$('#gtype').value;
+        db.sg.push({id:Date.now(),ts:ts,v:v,ty:ty,note:note});
+        res.innerHTML='<div class="nt-res">تم الحفظ: <b>'+v+' mg/dL</b> ('+fmt(v/18.016)+' mmol/L) '+chip(sgClass(v,ty))+'</div>';
+        $('#gval').value='';
+      }
+      $('#tnote').value='';$('#twhen').value=nowLocal();saveDB(db);renderTrack();
+    }
+    function renderTrack(){
+      var db=DB(),list=(ttype==='bp'?db.bp:db.sg).slice().sort(function(a,b){return a.ts-b.ts});
+      var head='<tr><th>التاريخ</th><th>القراءة</th><th>الحالة</th><th></th></tr>';
+      $('#ttab').innerHTML=list.length?head+list.slice().reverse().map(function(e){
+        var val=ttype==='bp'?'<b>'+e.s+'/'+e.d+'</b>'+(e.p?' · نبض '+e.p:''):'<bdi dir="ltr"><b>'+e.v+'</b> mg/dL <span class="nt-stat">('+fmt(e.v/18.016)+' mmol/L)</span></bdi><br><span class="nt-stat">'+GT[e.ty]+'</span>';
+        var k=ttype==='bp'?bpClass(e.s,e.d):sgClass(e.v,e.ty);
+        return '<tr><td>'+dtf(e.ts)+(e.note?'<br><span class="nt-stat">'+esc(e.note)+'</span>':'')+'</td><td>'+val+'</td><td>'+chip(k)+'</td><td><button class="nt-x" data-del="'+e.id+'" aria-label="حذف القراءة">✕</button></td></tr>';
+      }).join(''):'<tr><td>لا توجد قراءات بعد.</td></tr>';
+      var last=list.slice(-7),avg=function(k){return Math.round(last.reduce(function(a,e){return a+e[k]},0)/last.length)};
+      $('#tstat').innerHTML=last.length?'متوسط آخر '+last.length+' قراءات: <b><bdi dir="ltr">'+(ttype==='bp'?avg('s')+'/'+avg('d')+' mmHg':avg('v')+' mg/dL')+'</bdi></b>':'';
+      drawChart(list.slice(-20));
+    }
+    function drawChart(list){
+      var el=$('#chart');
+      if(list.length<2){el.innerHTML='<p class="note" dir="rtl">أضف قراءتين على الأقل لعرض المخطط.</p>';return;}
+      var W=600,H=260,L=44,R=14,Tp=14,B=34,isBP=ttype==='bp';
+      var series=isBP?[{k:'s',c:'#d64b32'},{k:'d',c:'#2a6fb0'}]:[{k:'v',c:'#1f7a6d'}];
+      var lines=isBP?[[120,'#e0a000'],[80,'#2a9d8f']]:[[70,'#2a6fb0'],[140,'#e0a000']];
+      var vals=[];list.forEach(function(e){series.forEach(function(s){vals.push(e[s.k])})});lines.forEach(function(l){vals.push(l[0])});
+      var mn=Math.floor((Math.min.apply(null,vals)-10)/10)*10,mx=Math.ceil((Math.max.apply(null,vals)+10)/10)*10;
+      var X=function(i){return L+(W-L-R)*i/(list.length-1)},Y=function(v){return Tp+(H-Tp-B)*(1-(v-mn)/(mx-mn))};
+      var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="مخطط القراءات المحفوظة">';
+      for(var i=0;i<=4;i++){var v=mn+(mx-mn)*i/4;s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#e1eeeb"/><text x="'+(L-6)+'" y="'+(Y(v)+4)+'" font-size="11" text-anchor="end" fill="#5b7573">'+Math.round(v)+'</text>';}
+      lines.forEach(function(l){s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(l[0])+'" y2="'+Y(l[0])+'" stroke="'+l[1]+'" stroke-dasharray="6 4"/><text x="'+(W-R)+'" y="'+(Y(l[0])-4)+'" font-size="11" text-anchor="end" fill="'+l[1]+'">'+l[0]+'</text>'});
+      series.forEach(function(se){
+        s+='<polyline fill="none" stroke="'+se.c+'" stroke-width="2.5" points="'+list.map(function(e,i){return X(i)+','+Y(e[se.k])}).join(' ')+'"/>';
+        list.forEach(function(e,i){s+='<circle cx="'+X(i)+'" cy="'+Y(e[se.k])+'" r="4" fill="'+se.c+'"/>'});
+      });
+      var fd=function(ts){return new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'short'})};
+      s+='<text x="'+L+'" y="'+(H-10)+'" font-size="11" fill="#5b7573">'+fd(list[0].ts)+'</text><text x="'+(W-R)+'" y="'+(H-10)+'" font-size="11" text-anchor="end" fill="#5b7573">'+fd(list[list.length-1].ts)+'</text></svg>';
+      if(isBP)s+='<div class="nt-stat" dir="rtl"><span style="color:#d64b32">●</span> الانقباضي &nbsp; <span style="color:#2a6fb0">●</span> الانبساطي</div>';
+      el.innerHTML=s;
+    }
+    function setTType(k){
+      ttype=k;$$('#tseg button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ty===k)});
+      $('#fbp').style.display=k==='bp'?'block':'none';$('#fsg').style.display=k==='sg'?'block':'none';$('#tres').innerHTML='';$('#tclrmsg').textContent='';renderTrack();
+    }
+    $$('#tseg button').forEach(function(b){b.addEventListener('click',function(){setTType(b.dataset.ty)})});
+    $('#tadd').addEventListener('click',addReading);
+    $('#ttab').addEventListener('click',function(e){var id=e.target.dataset&&e.target.dataset.del;if(!id)return;var db=DB();db[ttype]=db[ttype].filter(function(x){return String(x.id)!==id});saveDB(db);renderTrack()});
+    var armed=false;
+    $('#tclr').addEventListener('click',function(){
+      var m=$('#tclrmsg');
+      if(!armed){armed=true;m.textContent='اضغط "مسح هذه القائمة" مرة أخرى لحذف جميع القراءات في هذه القائمة.';setTimeout(function(){armed=false;m.textContent=''},5000);return;}
+      armed=false;var db=DB();db[ttype]=[];saveDB(db);m.textContent='تم مسح القائمة.';renderTrack();
+    });
+    $('#twhen').value=nowLocal();renderTrack();
+  })();
+  </script>
+</body>
+</html>
