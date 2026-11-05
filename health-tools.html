@@ -3,15 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health Tools | TAG M</title>
-  <meta name="description" content="Free BMI, stress, breathing, water and sleep tools for students.">
+  <title>Health Tools | NurseCare</title>
+  <meta name="description" content="Dose calculator, normal lab values, unit converter, vital signs, home care tips and a blood pressure and sugar tracker.">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
+  <style>
+    /* Health Tools tabs and tools */
+    .nt-tabs{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 0 .8rem;scrollbar-width:none}
+    .nt-tabs::-webkit-scrollbar{display:none}
+    .nt-tabs button{flex:none;border:2px solid var(--teal);background:#fff;color:var(--teal);font:700 1rem Cairo,sans-serif;border-radius:999px;padding:.4rem 1.1rem;cursor:pointer;white-space:nowrap}
+    .nt-tabs button[aria-selected=true]{background:var(--teal);color:#fff}
+    .nt-panel{display:none;max-width:760px;margin:0 auto}
+    .nt-panel.on{display:block}
+    .nt-card{background:#fff;border:1px solid var(--line);border-top:6px solid var(--teal-2);border-radius:20px;padding:1.4rem}
+    .nt-card h3{font-size:1.1rem;margin:1.2rem 0 .3rem}
+    .nt-card label{display:block;margin:.8rem 0 .25rem}
+    .nt-card input[type=search],.nt-card input[type=datetime-local]{font:inherit;color:var(--ink);padding:.55rem .8rem;border:1.5px solid #b9d3ce;border-radius:10px;background:#fff;width:100%}
+    .nt-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .nt-res{margin-top:1rem;padding:.9rem 1rem;border-radius:14px;background:#e6f6ec;border:1px solid #bfe3cd}
+    .nt-res.warn{background:#fff4d6;border-color:#f0d98a}
+    .nt-res.bad{background:#fde8e3;border-color:#f3c0b5}
+    .nt-big{font:800 1.7rem Nunito,sans-serif;color:var(--teal)}
+    .nt-disc{margin-top:1rem;padding:.7rem 1rem;border-radius:12px;background:#fff4d6;border:1px solid #f0d98a;font-size:.92rem}
+    .nt-card table{width:100%;border-collapse:collapse;font-size:.95rem}
+    .nt-card th,.nt-card td{padding:.5rem .4rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .nt-card th{color:var(--teal);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+    .nt-tw{overflow-x:auto}
+    .nt-cat{margin:1.2rem 0 .2rem;font-weight:700;color:var(--teal-2)}
+    .chip{display:inline-block;border-radius:999px;padding:.05rem .75rem;font-weight:700;font-size:.8rem}
+    .c-ok{background:#e6f6ec;color:#237a45}.c-warn{background:#fff4d6;color:#8a5f00}.c-bad{background:#fde8e3;color:#b23a22}.c-low{background:#e3eefa;color:#245f9c}
+    .nt-card details{border:1px solid var(--line);border-radius:14px;padding:.1rem 1rem;margin:.7rem 0;background:#fff}
+    .nt-card summary{cursor:pointer;font-weight:700;padding:.6rem 0;color:var(--teal)}
+    .nt-card details ol,.nt-card details ul{margin:.2rem 0 .8rem;padding-left:1.3rem}
+    .nt-card details li{margin:.3rem 0}
+    .nt-ref{display:grid;gap:.5rem;margin-top:.4rem}
+    .nt-ref div{padding:.5rem .8rem;border-radius:10px;font-size:.95rem}
+    .nt-row{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+    .nt-card svg.chart{width:100%;height:auto;display:block;background:#fbfefd;border:1px solid var(--line);border-radius:14px}
+    .nt-stat{color:#5b7573;font-size:.9rem;margin-top:.4rem}
+    .nt-x{border:0;background:none;color:#b23a22;font-size:1.1rem;cursor:pointer;font-weight:700}
+    .btn.sm{padding:.3rem .9rem;font-size:.9rem}
+    @media(max-width:520px){.nt-2{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="wrap bar">
-      <a class="brand" href="index.html" aria-label="TAG M home"><span class="brand-mark" aria-hidden="true"></span><span>TAG M<small>Health &amp; Wellbeing</small></span></a>
+      <a class="brand" href="index.html" aria-label="NurseCare home"><span class="brand-mark" aria-hidden="true"></span><span>NurseCare<small>Health &amp; Wellbeing</small></span></a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
       <nav aria-label="Main">
         <ul class="nav-links" id="menu">
@@ -28,113 +66,124 @@
   </header>
 
   <main>
-    <section class="page-hero"><div class="wrap"><h1>Health Tools</h1><p>Quick, private calculators and check-ins. Nothing you enter is saved or sent anywhere.</p></div></section>
+    <section class="page-hero"><div class="wrap"><h1>Health Tools</h1><p>Calculators and quick references for everyday care. Readings you save stay on your own device.</p></div></section>
 
     <section class="section">
       <div class="wrap">
-        <div class="jump" aria-label="Jump to a tool">
-          <a class="btn btn-ghost" href="#bmi">BMI</a>
-          <a class="btn btn-ghost" href="#stress">Stress check-in</a>
-          <a class="btn btn-ghost" href="#breathing">Breathing guide</a>
-          <a class="btn btn-ghost" href="#water">Water</a>
-          <a class="btn btn-ghost" href="#sleep">Sleep</a>
+        <div class="nt-tabs" role="tablist" aria-label="Tools" id="nt-tabs">
+          <button role="tab" data-tab="dose" aria-selected="true">Dose</button>
+          <button role="tab" data-tab="labs" aria-selected="false">Lab values</button>
+          <button role="tab" data-tab="units" aria-selected="false">Units</button>
+          <button role="tab" data-tab="vitals" aria-selected="false">Vital signs</button>
+          <button role="tab" data-tab="care" aria-selected="false">Home care</button>
+          <button role="tab" data-tab="track" aria-selected="false">BP &amp; Sugar tracker</button>
         </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="wrap">
+        <!-- DOSE -->
+        <div class="nt-panel on" id="p-dose"><div class="nt-card">
+          <h2>Dose calculator</h2>
+          <p class="note">Calculates a weight-based dose from the mg/kg value in the prescription or on the label.</p>
+          <div class="nt-2">
+            <div><label for="dw">Weight</label><input id="dw" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 20"></div>
+            <div><label for="dwu">Unit</label><select id="dwu"><option value="kg">kg</option><option value="lb">lb</option></select></div>
+          </div>
+          <label for="dpk">Dose per kg (mg/kg per dose)</label><input id="dpk" type="number" inputmode="decimal" min="0" step="any" placeholder="from the prescription or label">
+          <label for="dfr">Doses per day</label><input id="dfr" type="number" inputmode="numeric" min="1" step="1" placeholder="e.g. 3">
+          <div class="nt-2">
+            <div><label for="dms">Max single dose (mg), optional</label><input id="dms" type="number" inputmode="decimal" min="0" step="any"></div>
+            <div><label for="dmd">Max daily dose (mg), optional</label><input id="dmd" type="number" inputmode="decimal" min="0" step="any"></div>
+          </div>
+          <label for="dc">Concentration (mg per 1 mL), optional, for liquids</label><input id="dc" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 24 (120 mg / 5 mL = 24)">
+          <button class="btn" id="dbtn" type="button" style="margin-top:1rem">Calculate</button>
+          <div id="dout" aria-live="polite"></div>
+          <div class="nt-disc">For assistance only. Always verify the dose, the drug and the route with the prescriber, the pharmacist or the product label before giving any medicine.</div>
+        </div></div>
 
-        <!-- BMI -->
-        <div class="tool" id="bmi">
-          <h2>BMI calculator</h2>
-          <p>Body Mass Index compares your weight with your height. It is a rough screening number for adults aged 18 and over.</p>
-          <div class="tool-grid">
-            <form id="bmi-form" novalidate>
-              <div class="seg" role="group" aria-label="Units">
-                <button type="button" data-unit="metric" aria-pressed="true">Metric</button>
-                <button type="button" data-unit="imperial" aria-pressed="false">Imperial</button>
-              </div>
-              <div class="field" id="h-metric"><label for="bmi-cm">Height (cm)</label><input id="bmi-cm" type="number" inputmode="decimal" min="100" max="250" step="0.1" placeholder="e.g. 170"></div>
-              <div class="row" id="h-imp" hidden>
-                <div class="field"><label for="bmi-ft">Height (ft)</label><input id="bmi-ft" type="number" inputmode="numeric" min="3" max="8" placeholder="5"></div>
-                <div class="field"><label for="bmi-in">(in)</label><input id="bmi-in" type="number" inputmode="decimal" min="0" max="11.9" step="0.1" placeholder="7"></div>
-              </div>
-              <div class="field"><label for="bmi-w" id="bmi-wl">Weight (kg)</label><input id="bmi-w" type="number" inputmode="decimal" min="20" step="0.1" placeholder="e.g. 65"></div>
-              <p class="err" id="bmi-err" role="alert"></p>
-              <button class="btn" type="submit">Calculate</button>
-            </form>
-            <div class="result" id="bmi-out" aria-live="polite">
-              <p>Enter your height and weight to see your result.</p>
+        <!-- LABS -->
+        <div class="nt-panel" id="p-labs"><div class="nt-card">
+          <h2>Normal lab values</h2>
+          <p class="note">Typical adult reference ranges. Ranges vary between laboratories, so always use the range printed on the lab report.</p>
+          <label for="lsearch" class="sr-only">Search lab tests</label>
+          <input id="lsearch" type="search" placeholder="Search (e.g. sodium, Hb)">
+          <div id="labsOut"></div>
+        </div></div>
+
+        <!-- UNITS -->
+        <div class="nt-panel" id="p-units"><div class="nt-card">
+          <h2>Unit converter</h2>
+          <p class="note">Quick conversions used in everyday care.</p>
+          <label for="ucat">Type</label><select id="ucat"></select>
+          <div class="nt-2">
+            <div><label for="uval">Value</label><input id="uval" type="number" inputmode="decimal" step="any" placeholder="0"></div>
+            <div><label for="ufrom">From</label><select id="ufrom"></select></div>
+          </div>
+          <label for="uto">To</label><select id="uto"></select>
+          <div id="uout" class="nt-res" style="display:none" aria-live="polite"></div>
+          <div class="nt-disc">Teaspoon and tablespoon are approximate. Use a measuring syringe for liquid medicine.</div>
+        </div></div>
+
+        <!-- VITALS -->
+        <div class="nt-panel" id="p-vitals"><div class="nt-card">
+          <h2>Normal vital signs</h2>
+          <p class="note">Approximate resting ranges by age group.</p>
+          <div class="nt-tw"><table id="vtab"></table></div>
+          <h3>All ages</h3>
+          <div class="nt-ref">
+            <div style="background:#e6f6ec">Temperature: 36.1 to 37.2 °C (97 to 99 °F). Fever is 38 °C (100.4 °F) or above.</div>
+            <div style="background:#e6f6ec">Oxygen saturation (SpO₂): 95 to 100 %. Below 92 % needs urgent medical attention.</div>
+            <div style="background:#e3eefa">Pain score: 0 (none) to 10 (worst). Reassess after every intervention.</div>
+          </div>
+          <h3>Adult blood pressure categories</h3>
+          <div class="nt-ref" id="bpRef"></div>
+          <h3>Blood sugar (adults, mg/dL)</h3>
+          <div class="nt-ref" id="sgRef"></div>
+          <div class="nt-disc">Ranges are guides. Patients with a chronic illness follow the targets set by their doctor.</div>
+        </div></div>
+
+        <!-- CARE -->
+        <div class="nt-panel" id="p-care"><div class="nt-card">
+          <h2>Home care tips</h2>
+          <p class="note">Wound care and injections at home. Follow the instructions of your doctor or nurse first.</p>
+          <div id="careOut"></div>
+          <div class="nt-disc">Educational information only. It does not replace a medical examination. In an emergency call your local emergency number (911 in Jordan).</div>
+        </div></div>
+
+        <!-- TRACKER -->
+        <div class="nt-panel" id="p-track"><div class="nt-card">
+          <h2>Blood pressure &amp; sugar tracker</h2>
+          <p class="note">Your readings are saved only on this device. There is no account and nothing is uploaded.</p>
+          <div class="seg" id="tseg" role="group" aria-label="Reading type"><button type="button" data-ty="bp" aria-pressed="true">Blood pressure</button><button type="button" data-ty="sg" aria-pressed="false">Blood sugar</button></div>
+
+          <div id="fbp">
+            <div class="nt-2">
+              <div><label for="bsys">Systolic (top)</label><input id="bsys" type="number" inputmode="numeric" placeholder="120"></div>
+              <div><label for="bdia">Diastolic (bottom)</label><input id="bdia" type="number" inputmode="numeric" placeholder="80"></div>
             </div>
+            <label for="bpul">Pulse (optional)</label><input id="bpul" type="number" inputmode="numeric" placeholder="72">
           </div>
-          <p class="note" style="margin-top:1rem">BMI does not measure body fat, muscle, age, sex or ethnicity, and it is not suitable for under 18s or during pregnancy. Treat it as a starting point and talk to a doctor about your health.</p>
-        </div>
-
-        <!-- STRESS -->
-        <div class="tool" id="stress">
-          <h2>Stress check-in</h2>
-          <p>Think about the last two weeks. This is a simple self-reflection, not a diagnosis.</p>
-          <form id="stress-form" class="stack" novalidate>
-            <div id="stress-qs"></div>
-            <p class="err" id="stress-err" role="alert"></p>
-            <button class="btn" type="submit">See my result</button>
-          </form>
-          <div class="result" id="stress-out" aria-live="polite" style="margin-top:1rem" hidden></div>
-        </div>
-
-        <!-- BREATHING -->
-        <div class="tool" id="breathing">
-          <h2>Breathing guide</h2>
-          <p>Slow breathing can help you feel calmer within a few minutes. Pick a pattern, press start and follow the circle.</p>
-          <div class="tool-grid">
-            <div>
-              <div class="field"><label for="br-pattern">Pattern</label>
-                <select id="br-pattern">
-                  <option value="box">Box breathing (4 in, 4 hold, 4 out, 4 hold)</option>
-                  <option value="478">4-7-8 (4 in, 7 hold, 8 out)</option>
-                  <option value="calm">Gentle calm (4 in, 6 out)</option>
-                </select>
-              </div>
-              <div class="actions"><button class="btn" id="br-btn" type="button">Start</button></div>
-              <p class="note" style="margin-top:1rem">If you feel dizzy, stop and breathe normally.</p>
+          <div id="fsg" style="display:none">
+            <div class="nt-2">
+              <div><label for="gval">Reading</label><input id="gval" type="number" inputmode="decimal" step="any" placeholder="100"></div>
+              <div><label for="gunit">Unit</label><select id="gunit"><option value="mgdl">mg/dL</option><option value="mmol">mmol/L</option></select></div>
             </div>
-            <div class="stage"><div class="orb" id="br-orb" role="status" aria-live="polite">Ready</div></div>
+            <label for="gtype">When was it measured?</label>
+            <select id="gtype"><option value="fast">Fasting (8+ hours)</option><option value="pre">Before a meal</option><option value="post">2 hours after a meal</option><option value="bed">Bedtime</option><option value="rand">Random</option></select>
           </div>
-        </div>
+          <label for="twhen">Date and time</label><input id="twhen" type="datetime-local">
+          <label for="tnote">Note (optional)</label><input id="tnote" type="text" placeholder="e.g. after walking">
+          <button class="btn" id="tadd" type="button" style="margin-top:1rem">Save reading</button>
+          <div id="tres" aria-live="polite"></div>
 
-        <!-- WATER -->
-        <div class="tool" id="water">
-          <h2>Daily water estimate</h2>
-          <div class="tool-grid">
-            <form id="water-form" novalidate>
-              <div class="field"><label for="wa-w">Weight (kg)</label><input id="wa-w" type="number" inputmode="decimal" min="20" max="300" placeholder="e.g. 65"></div>
-              <div class="field"><label for="wa-act">Activity level</label>
-                <select id="wa-act"><option value="0">Mostly sitting (studying)</option><option value="350">Some exercise (30 min)</option><option value="700">Very active (1 hour+)</option></select></div>
-              <div class="field"><label><input type="checkbox" id="wa-hot"> Hot weather today</label></div>
-              <p class="err" id="wa-err" role="alert"></p>
-              <button class="btn" type="submit">Estimate</button>
-            </form>
-            <div class="result" id="wa-out" aria-live="polite"><p>Enter your weight to get a daily estimate.</p></div>
-          </div>
-          <p class="note" style="margin-top:1rem">A general estimate of total fluid. Needs vary, and some comes from food and other drinks. Follow medical advice if you have a health condition.</p>
-        </div>
+          <h3>Chart</h3>
+          <div id="chart"></div>
+          <div class="nt-stat" id="tstat"></div>
 
-        <!-- SLEEP -->
-        <div class="tool" id="sleep">
-          <h2>Sleep planner</h2>
-          <p>Sleep comes in cycles of about 90 minutes. Waking at the end of a cycle usually feels easier. We allow 15 minutes to fall asleep.</p>
-          <div class="tool-grid">
-            <form id="sleep-form" novalidate>
-              <div class="field"><label for="sl-mode">I want to</label>
-                <select id="sl-mode"><option value="wake">Wake up at a set time</option><option value="bed">Go to bed at a set time</option></select></div>
-              <div class="field"><label for="sl-time" id="sl-tl">Wake-up time</label><input id="sl-time" type="time" value="07:00"></div>
-              <button class="btn" type="submit">Show times</button>
-            </form>
-            <div class="result" id="sl-out" aria-live="polite"><p>Choose a time to see suggestions.</p></div>
-          </div>
-          <p class="note" style="margin-top:1rem">Most adults do well with 7 to 9 hours. Consistent sleep and wake times matter as much as the total.</p>
-        </div>
+          <h3>History</h3>
+          <div class="nt-tw"><table id="ttab"></table></div>
+          <button class="btn btn-ghost sm" id="tclr" type="button" style="margin-top:.8rem">Clear this list</button>
+          <p class="note" id="tclrmsg" aria-live="polite"></p>
+          <div class="nt-disc">This tracker is not a diagnosis. Share your readings with your doctor. Very high or very low readings with symptoms need urgent care.</div>
+        </div></div>
 
       </div>
     </section>
@@ -142,7 +191,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <strong>TAG M</strong>, a student project at Applied Science Private University.
+      <strong>NurseCare</strong>, a student project at Applied Science Private University.
       <ul class="footer-links">
         <li><a href="health-tools.html">Health Tools</a></li>
         <li><a href="resources.html">Resources</a></li>
@@ -154,5 +203,187 @@
   </footer>
 
   <script src="site.js"></script>
+  <script>
+  (function(){
+    var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+    var fmt=function(n){return String(+Number(n).toFixed(2))};
+    var store={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+    /* Status chips */
+    var ST={
+      normal:['c-ok','Normal'],elev:['c-warn','Elevated'],s1:['c-warn','High, stage 1'],s2:['c-bad','High, stage 2'],
+      crisis:['c-bad','Hypertensive crisis, seek urgent care'],low:['c-low','Low'],pre:['c-warn','Prediabetes range'],
+      hi:['c-bad','High (diabetes range)'],hypo:['c-low','Low sugar (hypoglycemia)'],sev:['c-bad','Very low, act now']
+    };
+    var chip=function(k){return '<span class="chip '+ST[k][0]+'">'+ST[k][1]+'</span>'};
+    function bpClass(s,d){
+      if(s>180||d>120)return'crisis';if(s<90||d<60)return'low';
+      if(s>=140||d>=90)return's2';if(s>=130||d>=80)return's1';if(s>=120)return'elev';return'normal';}
+    function sgClass(v,ty){
+      if(v<54)return'sev';if(v<70)return'hypo';
+      if(ty==='fast'||ty==='pre'){if(v<=99)return'normal';if(v<=125)return'pre';return'hi';}
+      if(v<140)return'normal';if(v<200)return'pre';return'hi';}
+
+    /* Tabs */
+    $$('#nt-tabs button').forEach(function(b){b.addEventListener('click',function(){
+      $$('#nt-tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      $$('.nt-panel').forEach(function(p){p.classList.toggle('on',p.id==='p-'+b.dataset.tab)});
+    })});
+
+    /* Dose */
+    $('#dbtn').addEventListener('click',function(){
+      var w=parseFloat($('#dw').value);if($('#dwu').value==='lb'&&w>0)w*=0.45359237;
+      var dpk=parseFloat($('#dpk').value),fr=parseFloat($('#dfr').value),ms=parseFloat($('#dms').value),md=parseFloat($('#dmd').value),c=parseFloat($('#dc').value),o=$('#dout');
+      if(!(w>0&&dpk>0&&fr>0)){o.innerHTML='<div class="nt-res warn">Please enter weight, dose per kg and doses per day.</div>';return;}
+      var dose=w*dpk,msgs=[],cls='nt-res';
+      if(ms>0&&dose>ms){dose=ms;msgs.push('The calculated dose was above your max single dose, so it was capped at the max.');cls='nt-res warn';}
+      var daily=dose*fr;
+      if(md>0&&daily>md){msgs.push('Total daily dose is above the max daily dose. Do not give. Maximum per dose with this frequency would be <b>'+fmt(md/fr)+' mg</b>.');cls='nt-res bad';}
+      var h='<div class="'+cls+'"><div>Dose per administration: <span class="nt-big">'+fmt(dose)+' mg</span></div>';
+      if(c>0)h+='<div>Volume per dose: <b>'+fmt(dose/c)+' mL</b></div>';
+      h+='<div>Total per day: <b>'+fmt(daily)+' mg</b> ('+fmt(fr)+' doses)</div><div class="nt-stat">Weight used: '+fmt(w)+' kg</div>';
+      msgs.forEach(function(m){h+='<div style="margin-top:.5rem"><b>'+m+'</b></div>'});
+      o.innerHTML=h+'</div>';
+    });
+
+    /* Labs */
+    var LABS=[
+      ['Complete blood count',[['Hemoglobin (Hb)','M 13.5–17.5 · F 12.0–15.5 g/dL'],['Hematocrit (Hct)','M 41–50 % · F 36–44 %'],['WBC','4.0–11.0 ×10³/µL'],['Platelets','150–400 ×10³/µL'],['RBC','M 4.7–6.1 · F 4.2–5.4 ×10⁶/µL'],['MCV','80–100 fL']]],
+      ['Electrolytes',[['Sodium (Na⁺)','135–145 mmol/L'],['Potassium (K⁺)','3.5–5.0 mmol/L'],['Chloride (Cl⁻)','98–106 mmol/L'],['Bicarbonate (HCO₃⁻)','22–29 mmol/L'],['Calcium (total)','8.5–10.5 mg/dL'],['Magnesium','1.7–2.2 mg/dL'],['Phosphate','2.5–4.5 mg/dL']]],
+      ['Kidney function',[['Creatinine','M 0.7–1.3 · F 0.6–1.1 mg/dL'],['BUN (urea nitrogen)','7–20 mg/dL'],['eGFR','> 90 mL/min/1.73m²'],['Uric acid','M 3.4–7.0 · F 2.4–6.0 mg/dL']]],
+      ['Liver function',[['ALT (SGPT)','7–56 U/L'],['AST (SGOT)','10–40 U/L'],['ALP','44–147 U/L'],['Total bilirubin','0.1–1.2 mg/dL'],['Albumin','3.5–5.0 g/dL'],['Total protein','6.0–8.3 g/dL']]],
+      ['Diabetes',[['Fasting glucose','70–99 mg/dL (100–125 prediabetes · ≥126 diabetes)'],['Glucose 2 h after meal','< 140 mg/dL'],['HbA1c','< 5.7 % (5.7–6.4 prediabetes · ≥6.5 diabetes)']]],
+      ['Lipids',[['Total cholesterol','< 200 mg/dL'],['LDL','< 100 mg/dL'],['HDL','M > 40 · F > 50 mg/dL'],['Triglycerides','< 150 mg/dL']]],
+      ['Coagulation & thyroid',[['INR','0.8–1.1 (on warfarin usually 2.0–3.0)'],['PT','11–13.5 s'],['aPTT','25–35 s'],['TSH','0.4–4.0 mIU/L']]],
+      ['Arterial blood gas (ABG)',[['pH','7.35–7.45'],['PaCO₂','35–45 mmHg'],['PaO₂','80–100 mmHg'],['HCO₃⁻','22–26 mmol/L'],['SaO₂','95–100 %'],['Lactate','0.5–2.0 mmol/L']]]
+    ];
+    function renderLabs(){
+      var q=$('#lsearch').value.trim().toLowerCase(),h='',any=false;
+      LABS.forEach(function(g){
+        var rows=g[1].filter(function(r){return !q||(r[0]+' '+g[0]).toLowerCase().indexOf(q)>-1});
+        if(!rows.length)return;any=true;
+        h+='<div class="nt-cat">'+g[0]+'</div><div class="nt-tw"><table><tr><th>Test</th><th>Normal range</th></tr>'+rows.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td></tr>'}).join('')+'</table></div>';
+      });
+      $('#labsOut').innerHTML=any?h:'<p class="note">No results</p>';
+    }
+    $('#lsearch').addEventListener('input',renderLabs);renderLabs();
+
+    /* Units */
+    var lin=function(f){return{to:function(x){return x*f},from:function(x){return x/f}}};
+    var UN={
+      mass:['Weight / mass',{mcg:lin(1e-6),mg:lin(1e-3),g:lin(1),kg:lin(1000),lb:lin(453.592),oz:lin(28.3495)}],
+      vol:['Volume',{mL:lin(1),L:lin(1000),tsp:lin(5),tbsp:lin(15),'fl oz':lin(29.5735)}],
+      temp:['Temperature',{'°C':{to:function(x){return x},from:function(x){return x}},'°F':{to:function(x){return (x-32)*5/9},from:function(x){return x*9/5+32}},'K':{to:function(x){return x-273.15},from:function(x){return x+273.15}}}],
+      len:['Length / height',{cm:lin(1),m:lin(100),'in':lin(2.54),ft:lin(30.48)}],
+      glu:['Glucose',{'mg/dL':lin(1),'mmol/L':lin(18.016)}],
+      cre:['Creatinine',{'mg/dL':lin(1),'µmol/L':lin(1/88.4)}],
+      cho:['Cholesterol',{'mg/dL':lin(1),'mmol/L':lin(38.67)}]
+    };
+    $('#ucat').innerHTML=Object.keys(UN).map(function(k){return '<option value="'+k+'">'+UN[k][0]+'</option>'}).join('');
+    function fillUnits(){
+      var ks=Object.keys(UN[$('#ucat').value][1]),o=ks.map(function(k){return '<option>'+k+'</option>'}).join('');
+      $('#ufrom').innerHTML=o;$('#uto').innerHTML=o;if(ks[1])$('#uto').value=ks[1];convert();
+    }
+    function convert(){
+      var u=UN[$('#ucat').value][1],v=parseFloat($('#uval').value),o=$('#uout');
+      if(isNaN(v)){o.style.display='none';return;}
+      var f=$('#ufrom').value,to=$('#uto').value,r=u[to].from(u[f].to(v));
+      o.style.display='block';o.innerHTML=fmt(v)+' '+f+' = <span class="nt-big">'+(+r.toPrecision(6))+' '+to+'</span>';
+    }
+    $('#ucat').addEventListener('change',fillUnits);$('#ufrom').addEventListener('change',convert);$('#uto').addEventListener('change',convert);$('#uval').addEventListener('input',convert);fillUnits();
+
+    /* Vitals */
+    var VT=[['Newborn (0–1 mo)','100–180','30–60','60–90'],['Infant (1–12 mo)','100–160','30–60','70–100'],['Toddler (1–3 y)','90–150','24–40','80–110'],['Preschool (3–6 y)','80–140','22–34','80–110'],['School age (6–12 y)','70–120','18–30','90–120'],['Adolescent (12–18 y)','60–100','12–20','100–130'],['Adult','60–100','12–20','90–120'],['Older adult (65+)','60–100','12–25','< 130']];
+    $('#vtab').innerHTML='<tr><th>Age</th><th>Heart rate (bpm)</th><th>Resp. rate (/min)</th><th>Systolic BP (mmHg)</th></tr>'+VT.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>'}).join('');
+    var bp=[['normal','< 120 / < 80'],['elev','120–129 / < 80'],['s1','130–139 / 80–89'],['s2','≥ 140 / ≥ 90'],['crisis','> 180 / > 120'],['low','< 90 / < 60']];
+    var bg={'c-ok':'#e6f6ec','c-warn':'#fff4d6','c-bad':'#fde8e3','c-low':'#e3eefa'};
+    $('#bpRef').innerHTML=bp.map(function(p){return '<div class="nt-row" style="background:'+bg[ST[p[0]][0]]+'"><b>'+ST[p[0]][1]+'</b><span>'+p[1]+' mmHg</span></div>'}).join('');
+    var sg=[['hypo','< 70'],['normal','Fasting 70–99 · 2 h after meal < 140'],['pre','Fasting 100–125 · 2 h after meal 140–199'],['hi','Fasting ≥ 126 · 2 h after meal ≥ 200']];
+    $('#sgRef').innerHTML=sg.map(function(p){return '<div class="nt-row" style="background:'+bg[ST[p[0]][0]]+'"><b>'+ST[p[0]][1]+'</b><span>'+p[1]+'</span></div>'}).join('');
+
+    /* Home care */
+    var CARE=[
+      ['Minor cuts and scrapes',true,['Wash your hands with soap and water (or wear clean gloves).','Stop the bleeding by pressing firmly with a clean cloth or gauze for 10 minutes. Raise the area above the heart.','Rinse the wound under clean running water or saline for several minutes to remove dirt.','Clean the skin around the wound with mild soap. Avoid putting hydrogen peroxide or strong antiseptics inside the wound.','Cover with a clean non-stick dressing or bandage.','Change the dressing once a day or whenever it gets wet or dirty. Keep the wound clean and dry.']],
+      ['Signs of infection',false,['Increasing redness, swelling, warmth or pain after the first 1 to 2 days.','Pus or a bad smell coming from the wound.','Red streaks spreading from the wound, or fever.']],
+      ['See a doctor right away if',false,['Bleeding does not stop after 10 to 15 minutes of firm pressure.','The wound is deep, wide, gaping, on the face or over a joint, or may need stitches.','It was caused by an animal or human bite, a rusty or dirty object, or you have not had a tetanus shot in the last 5 to 10 years.','The person has diabetes, poor circulation or a weak immune system.']],
+      ['Giving an injection at home (subcutaneous, e.g. insulin)',true,['Only inject medicines that were prescribed, and after being taught by a nurse or doctor.','Wash your hands. Check the medicine name, dose, expiry date and that the liquid looks normal (no cloudiness or particles unless it is meant to be cloudy).','Use a new needle and syringe every time. Never share needles or pens.','Choose a site (abdomen, outer thigh or back of upper arm) and rotate sites each time. Avoid bruised, hard or lumpy areas.','Clean the skin with an alcohol swab and let it dry completely.','Insert the needle as taught (usually 90° with short pen needles, or 45° if you have little fat), push the plunger slowly, wait about 10 seconds, then remove it.','Do not rub the area. Press lightly with clean cotton if there is a drop of blood.','Do not put the cap back on. Drop the used needle straight into a sharps container (or a hard plastic bottle with a lid).','Wash your hands and write down the dose and time.']],
+      ['Injection problems: call your doctor',false,['Spreading redness, heat, pus or increasing pain at the site.','Rash, swelling of the face or lips, or difficulty breathing (possible allergy): call emergency services immediately.','Low sugar signs after insulin (shaking, sweating, confusion): follow your diabetes plan and seek help.']]
+    ];
+    $('#careOut').innerHTML=CARE.map(function(s,i){var tag=s[1]?'ol':'ul';return '<details'+(i===0?' open':'')+'><summary>'+s[0]+'</summary><'+tag+'>'+s[2].map(function(x){return '<li>'+x+'</li>'}).join('')+'</'+tag+'></details>'}).join('');
+
+    /* Tracker */
+    var ttype='bp';
+    var DB=function(){return store.get('nursecare_tracker_v1',{bp:[],sg:[]})},saveDB=function(d){store.set('nursecare_tracker_v1',d)};
+    var nowLocal=function(){var d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+    var dtf=function(ts){return new Date(ts).toLocaleString('en-GB',{dateStyle:'short',timeStyle:'short'})};
+    var GT={fast:'Fasting',pre:'Before a meal',post:'2 h after a meal',bed:'Bedtime',rand:'Random'};
+    var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};
+    function addReading(){
+      var db=DB(),ts=new Date($('#twhen').value||Date.now()).getTime(),note=$('#tnote').value.trim(),res=$('#tres');
+      if(ttype==='bp'){
+        var s=parseFloat($('#bsys').value),d=parseFloat($('#bdia').value),p=parseFloat($('#bpul').value);
+        if(!(s>0&&d>0)||s<=d||s>300||d>200){res.innerHTML='<div class="nt-res warn">Please enter valid numbers.</div>';return;}
+        db.bp.push({id:Date.now(),ts:ts,s:s,d:d,p:p>0?p:null,note:note});
+        res.innerHTML='<div class="nt-res">Saved: <b>'+s+'/'+d+'</b> '+chip(bpClass(s,d))+'</div>';
+        $('#bsys').value=$('#bdia').value=$('#bpul').value='';
+      }else{
+        var v=parseFloat($('#gval').value);if($('#gunit').value==='mmol')v*=18.016;
+        if(!(v>10&&v<1000)){res.innerHTML='<div class="nt-res warn">Please enter valid numbers.</div>';return;}
+        v=Math.round(v);var ty=$('#gtype').value;
+        db.sg.push({id:Date.now(),ts:ts,v:v,ty:ty,note:note});
+        res.innerHTML='<div class="nt-res">Saved: <b>'+v+' mg/dL</b> ('+fmt(v/18.016)+' mmol/L) '+chip(sgClass(v,ty))+'</div>';
+        $('#gval').value='';
+      }
+      $('#tnote').value='';$('#twhen').value=nowLocal();saveDB(db);renderTrack();
+    }
+    function renderTrack(){
+      var db=DB(),list=(ttype==='bp'?db.bp:db.sg).slice().sort(function(a,b){return a.ts-b.ts});
+      var head='<tr><th>Date</th><th>Reading</th><th>Status</th><th></th></tr>';
+      $('#ttab').innerHTML=list.length?head+list.slice().reverse().map(function(e){
+        var val=ttype==='bp'?'<b>'+e.s+'/'+e.d+'</b>'+(e.p?' · pulse '+e.p:''):'<b>'+e.v+'</b> mg/dL <span class="nt-stat">('+fmt(e.v/18.016)+' mmol/L)</span><br><span class="nt-stat">'+GT[e.ty]+'</span>';
+        var k=ttype==='bp'?bpClass(e.s,e.d):sgClass(e.v,e.ty);
+        return '<tr><td>'+dtf(e.ts)+(e.note?'<br><span class="nt-stat">'+esc(e.note)+'</span>':'')+'</td><td>'+val+'</td><td>'+chip(k)+'</td><td><button class="nt-x" data-del="'+e.id+'" aria-label="Delete reading">✕</button></td></tr>';
+      }).join(''):'<tr><td>No readings yet.</td></tr>';
+      var last=list.slice(-7),avg=function(k){return Math.round(last.reduce(function(a,e){return a+e[k]},0)/last.length)};
+      $('#tstat').innerHTML=last.length?'Average of last '+last.length+' readings: <b>'+(ttype==='bp'?avg('s')+'/'+avg('d')+' mmHg':avg('v')+' mg/dL')+'</b>':'';
+      drawChart(list.slice(-20));
+    }
+    function drawChart(list){
+      var el=$('#chart');
+      if(list.length<2){el.innerHTML='<p class="note">Add at least 2 readings to see the chart.</p>';return;}
+      var W=600,H=260,L=44,R=14,Tp=14,B=34,isBP=ttype==='bp';
+      var series=isBP?[{k:'s',c:'#d64b32'},{k:'d',c:'#2a6fb0'}]:[{k:'v',c:'#1f7a6d'}];
+      var lines=isBP?[[120,'#e0a000'],[80,'#2a9d8f']]:[[70,'#2a6fb0'],[140,'#e0a000']];
+      var vals=[];list.forEach(function(e){series.forEach(function(s){vals.push(e[s.k])})});lines.forEach(function(l){vals.push(l[0])});
+      var mn=Math.floor((Math.min.apply(null,vals)-10)/10)*10,mx=Math.ceil((Math.max.apply(null,vals)+10)/10)*10;
+      var X=function(i){return L+(W-L-R)*i/(list.length-1)},Y=function(v){return Tp+(H-Tp-B)*(1-(v-mn)/(mx-mn))};
+      var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Chart of saved readings">';
+      for(var i=0;i<=4;i++){var v=mn+(mx-mn)*i/4;s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#e1eeeb"/><text x="'+(L-6)+'" y="'+(Y(v)+4)+'" font-size="11" text-anchor="end" fill="#5b7573">'+Math.round(v)+'</text>';}
+      lines.forEach(function(l){s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(l[0])+'" y2="'+Y(l[0])+'" stroke="'+l[1]+'" stroke-dasharray="6 4"/><text x="'+(W-R)+'" y="'+(Y(l[0])-4)+'" font-size="11" text-anchor="end" fill="'+l[1]+'">'+l[0]+'</text>'});
+      series.forEach(function(se){
+        s+='<polyline fill="none" stroke="'+se.c+'" stroke-width="2.5" points="'+list.map(function(e,i){return X(i)+','+Y(e[se.k])}).join(' ')+'"/>';
+        list.forEach(function(e,i){s+='<circle cx="'+X(i)+'" cy="'+Y(e[se.k])+'" r="4" fill="'+se.c+'"/>'});
+      });
+      var fd=function(ts){return new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'short'})};
+      s+='<text x="'+L+'" y="'+(H-10)+'" font-size="11" fill="#5b7573">'+fd(list[0].ts)+'</text><text x="'+(W-R)+'" y="'+(H-10)+'" font-size="11" text-anchor="end" fill="#5b7573">'+fd(list[list.length-1].ts)+'</text></svg>';
+      if(isBP)s+='<div class="nt-stat"><span style="color:#d64b32">●</span> Systolic &nbsp; <span style="color:#2a6fb0">●</span> Diastolic</div>';
+      el.innerHTML=s;
+    }
+    function setTType(k){
+      ttype=k;$$('#tseg button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ty===k)});
+      $('#fbp').style.display=k==='bp'?'block':'none';$('#fsg').style.display=k==='sg'?'block':'none';$('#tres').innerHTML='';$('#tclrmsg').textContent='';renderTrack();
+    }
+    $$('#tseg button').forEach(function(b){b.addEventListener('click',function(){setTType(b.dataset.ty)})});
+    $('#tadd').addEventListener('click',addReading);
+    $('#ttab').addEventListener('click',function(e){var id=e.target.dataset&&e.target.dataset.del;if(!id)return;var db=DB();db[ttype]=db[ttype].filter(function(x){return String(x.id)!==id});saveDB(db);renderTrack()});
+    var armed=false;
+    $('#tclr').addEventListener('click',function(){
+      var m=$('#tclrmsg');
+      if(!armed){armed=true;m.textContent='Press "Clear this list" again to delete all readings in this list.';setTimeout(function(){armed=false;m.textContent=''},5000);return;}
+      armed=false;var db=DB();db[ttype]=[];saveDB(db);m.textContent='List cleared.';renderTrack();
+    });
+    $('#twhen').value=nowLocal();renderTrack();
+  })();
+  </script>
 </body>
 </html>
